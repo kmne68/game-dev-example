@@ -11,9 +11,6 @@ public class Player extends GameObject {
 	public Player(int x, int y, ID id) {
 		super(x, y, id);
 
-		velocityX = random.nextInt(5) + 1;
-		velocityY = random.nextInt(5);
-//		velocityX = 1;		// testing
 	}
 
 	
@@ -29,8 +26,8 @@ public class Player extends GameObject {
 	@Override
 	public void render(Graphics g) {
 
-		g.setColor(Color.DARK_GRAY);		// testing
-		g.fillRect(x, y, 32, 32);				// testing
+		g.setColor(Color.WHITE);
+		g.fillRect(x, y, 32, 32);
 		
 		
 	}
