@@ -11,5 +11,5 @@ package com.kmne68.main;
 public enum ID {
 	
 	Player(),
-	Enemy();
+	BasicEnemy();
 }

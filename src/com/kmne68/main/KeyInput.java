@@ -37,6 +37,9 @@ public class KeyInput extends KeyAdapter {
 					tempObject.setVelocityX(5);
 			}
 		}
+		
+		if(key == KeyEvent.VK_ESCAPE)
+			System.exit(0);
 				
 	}
 	
