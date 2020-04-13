@@ -12,12 +12,13 @@ import java.awt.Rectangle;
  */
 public abstract class GameObject {
 
-	protected int x, y;		// coordinate values
+	protected float x, y;		// coordinate values
 	protected ID id;
-	protected int velocityX, velocityY;
+	protected float velocityX;
+	protected float velocityY;
 	
 	
-	public GameObject(int x, int y, ID id) {
+	public GameObject(float x, float y, ID id) {
 		
 		this.x 	= x;
 		this.y 	= y;
@@ -31,27 +32,27 @@ public abstract class GameObject {
 	public abstract Rectangle getBounds();
 	
 	
-	public void setX(int x) {
+	public void setX(float x) {
 		
 		this.x = x;
 		
 	}
 	
 	
-	public void setY(int y) {
+	public void setY(float y) {
 		
 		this.y = y;
 		
 	}
 	
-	public int getX() {
+	public float getX() {
 		
 		return x;
 		
 	}
 	
 	
-	public int getY() {
+	public float getY() {
 		
 		return y;
 		
@@ -71,28 +72,28 @@ public abstract class GameObject {
 	}
 	
 
-	public void setVelocityX(int velocityX) {
+	public void setVelocityX(float velocityX) {
 		
 		this.velocityX = velocityX;
 		
 	}
 	
 
-	public int getVelocityX() {
+	public float getVelocityX() {
 		
 		return velocityX;
 		
 	}
 
 
-	public void setVelocityY(int velocityY) {
+	public void setVelocityY(float velocityY) {
 		
 		this.velocityY = velocityY;
 		
 	}
 	
 	
-	public int getVelocityY() {
+	public float getVelocityY() {
 		
 		return velocityY;
 		

@@ -8,11 +8,17 @@ import java.awt.event.KeyEvent;
 public class KeyInput extends KeyAdapter {
 	
 	private Handler handler;
+	private boolean[] keyDown = new boolean[4];
 	
 	
 	public KeyInput(Handler handler) {
 		
 		this.handler = handler;
+		
+		keyDown[0] = false;		// corresponds to W key
+		keyDown[1] = false;		// corresponds to S key
+		keyDown[2] = false;		// corresponds to D key
+		keyDown[3] = false;		// corresponds to A key
 		
 	}
 	
@@ -27,14 +33,22 @@ public class KeyInput extends KeyAdapter {
 			if(tempObject.getId() == ID.Player) {
 				
 				// key events for object
-				if(key == KeyEvent.VK_W)
+				if(key == KeyEvent.VK_W) {
 					tempObject.setVelocityY(-5);
-				if(key == KeyEvent.VK_S)
+					keyDown[0] = true;
+				}
+				if(key == KeyEvent.VK_S) {
 					tempObject.setVelocityY(5);
-				if(key == KeyEvent.VK_A)
+					keyDown[1] = true;
+				}
+				if(key == KeyEvent.VK_A) {
 					tempObject.setVelocityX(-5);
-				if(key == KeyEvent.VK_D)
+					keyDown[2] = true;
+				}
+				if(key == KeyEvent.VK_D) {
 					tempObject.setVelocityX(5);
+					keyDown[3] = true;
+				}
 			}
 		}
 		
@@ -56,13 +70,21 @@ public class KeyInput extends KeyAdapter {
 				
 				// key events for object
 				if(key == KeyEvent.VK_W)
-					tempObject.setVelocityY(0);
+					keyDown[0] = false;											// tempObject.setVelocityY(0);
 				if(key == KeyEvent.VK_S)
-					tempObject.setVelocityY(0);
+					keyDown[1] = false;											// tempObject.setVelocityY(0);
 				if(key == KeyEvent.VK_A)
-					tempObject.setVelocityX(0);
+					keyDown[2] = false;											// tempObject.setVelocityX(0);
 				if(key == KeyEvent.VK_D)
+					keyDown[3] = false;											// tempObject.setVelocityX(0);
+				
+				// vertical movement
+				if(!keyDown[0] && !keyDown[1])
+					tempObject.setVelocityY(0);
+				// horizontal movement
+				if(!keyDown[2] && !keyDown[3])
 					tempObject.setVelocityX(0);
+				
 			}
 		}
 		

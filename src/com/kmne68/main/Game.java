@@ -118,7 +118,7 @@ public class Game extends Canvas implements Runnable {
 	private void tick() {
 		
 		handler.tick();
-		hud.ticck();
+		hud.tick();
 		spawn.tick();
 		
 	}
@@ -147,7 +147,7 @@ public class Game extends Canvas implements Runnable {
 	}
 	
 	
-	public static int clamp(int var, int min, int max) {
+	public static float clamp(float var, float min, float max) {
 		
 		if(var >= max)
 			return var = max;

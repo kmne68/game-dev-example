@@ -20,7 +20,7 @@ public class Player extends GameObject {
 	
 	public Rectangle getBounds() {
 		
-		return new Rectangle(x, y, 32, 32);
+		return new Rectangle((int) x, (int) y, 32, 32);
 	}
 
 	
@@ -46,7 +46,7 @@ public class Player extends GameObject {
 			
 			GameObject tempObject = handler.gameObjects.get(i);
 			
-			if(tempObject.getId() == ID.BasicEnemy || tempObject.getId() == ID.FastEnemy) {
+			if(tempObject.getId() == ID.BasicEnemy || tempObject.getId() == ID.FastEnemy || tempObject.getId() == ID.SmartEnemy) {
 				
 				if(getBounds().intersects(tempObject.getBounds())) {
 					// collision code
@@ -62,7 +62,7 @@ public class Player extends GameObject {
 	public void render(Graphics g) {
 
 		g.setColor(Color.WHITE);
-		g.fillRect(x, y, 32, 32);		
+		g.fillRect( (int) x, (int) y, 32, 32);		
 		
 	}
 
