@@ -41,6 +41,23 @@ public class Handler {
 	}
 	
 	
+	public void clearEnemies() {
+		
+		for(int i = 0; i < gameObjects.size(); i++) {
+			
+			GameObject tempObject = gameObjects.get(i);
+			
+			if ( tempObject.getId() == ID.Player )
+			{
+				gameObjects.clear();
+				addObject(new Player( (int) tempObject.getX(), (int) tempObject.getY(), ID.Player, this ) );
+			}
+			
+		}
+		
+	}
+	
+	
 	public void addObject(GameObject object) {
 		
 		this.gameObjects.add(object);
