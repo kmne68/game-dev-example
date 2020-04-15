@@ -32,7 +32,18 @@ public class Game extends Canvas implements Runnable {
 	private Random random;
 	private Handler handler;
 	private HUD hud;
-	private Spawn spawn;
+	private Spawn spawner;
+	private Menu menu;
+	
+	public enum STATE {
+		
+		// TODO: Create an About menu option and corresponding screen
+		Menu,
+		Game,
+
+	};
+	
+	public STATE gameState = STATE.Menu;
 	
 	
 	public Game() {
@@ -43,21 +54,20 @@ public class Game extends Canvas implements Runnable {
 		new Window(WIDTH, HEIGHT, "Game Dev Example", this);
 		
 		hud = new HUD();
-		spawn = new Spawn(handler, hud);
+		spawner = new Spawn(handler, hud);
+		menu = new Menu(this, handler);
 		random = new Random();		// testing
 		
-		handler.addObject(new Player(WIDTH/2 - 32, HEIGHT/2 - 32, ID.Player, handler));
-		
-		handler.addObject(new BasicEnemy(random.nextInt(Game.WIDTH),
+		if( gameState == STATE.Game) {
+			
+			handler.addObject(new Player(WIDTH/2 - 32, HEIGHT/2 - 32, ID.Player, handler));
+			handler.addObject(new BasicEnemy(random.nextInt(Game.WIDTH),
 																			 random.nextInt(Game.HEIGHT),
 																			 ID.BasicEnemy,
 																			 handler));
+			
+		}
 		
-		
-	//	handler.addObject(new EnemyBoss( ( Game.WIDTH / 2 ) - 48, -120, ID.EnemyBoss, handler));
-																		 
-		//handler.addObject(new BasicEnemy(WIDTH/2 - 32, HEIGHT/2 - 32, ID.BasicEnemy, handler));
-
 	}
 	
 
@@ -123,8 +133,17 @@ public class Game extends Canvas implements Runnable {
 	private void tick() {
 		
 		handler.tick();
-		hud.tick();
-		spawn.tick();
+		
+		if(gameState == STATE.Game) {
+
+			hud.tick();
+			spawner.tick();
+			
+		} else if ( gameState == STATE.Menu ){
+			
+			menu.tick();
+			
+		}
 		
 	}
 	
@@ -144,7 +163,16 @@ public class Game extends Canvas implements Runnable {
 		
 		handler.render(g);
 		
-		hud.render(g);
+		if( gameState == STATE.Game) {
+			
+			hud.render(g);
+			
+		} else if( gameState == STATE.Menu) {
+			
+			menu.render(g);
+			
+		}
+		
 				
 		g.dispose();
 		bs.show();
