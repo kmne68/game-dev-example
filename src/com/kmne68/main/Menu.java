@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Random;
 
 import com.kmne68.main.Game.STATE;
 
@@ -19,6 +20,7 @@ public class Menu extends MouseAdapter {
 	
 	private Game game;
 	private Handler handler;
+	private Random random = new Random();
 	
 	
 	public Menu( Game game, Handler handler ) {
@@ -34,9 +36,45 @@ public class Menu extends MouseAdapter {
 		int mouseX = e.getX();
 		int mouseY = e.getY();
 		
-		if(mouseOver ( mouseX, mouseY, 210, 100, 200, 64 ) ) {
+		
+		if( game.gameState == STATE.Menu ) {
 			
-			game.gameState = STATE.Game;
+			// Play button
+			if(mouseOver ( mouseX, mouseY, 210, 100, 200, 64 ) ) {
+				
+				game.gameState = STATE.Game;
+				
+				handler.addObject(new Player(Game.WIDTH/2 - 32, Game.HEIGHT/2 - 32, ID.Player, handler));
+				handler.addObject(new BasicEnemy(random.nextInt(Game.WIDTH),
+																				 random.nextInt(Game.HEIGHT),
+																				 ID.BasicEnemy,
+																				 handler));
+				
+			}
+			
+			// Help button
+			if( mouseOver( mouseX, mouseY, 210, 300, 200, 64 ) ) {
+				
+				game.gameState = STATE.Help;
+				
+			}			
+			
+			// Quit button
+			if( mouseOver(mouseX, mouseY, 210, 200, 200, 64 ) ) {
+				
+				System.exit(1);
+				
+			}
+			
+		}		
+		
+		// Back button for Help
+		if( game.gameState == STATE.Help ) {
+			if(mouseOver( mouseX, mouseY, 210, 200, 200, 64 ) ) {
+				
+				game.gameState = STATE.Menu;
+				return;
+			}
 			
 		}
 		
@@ -59,24 +97,44 @@ public class Menu extends MouseAdapter {
 	
 	public void render(Graphics g) {
 		
+
 		Font fontArial50 = new Font( "arial", 1, 50);
 		Font fontArial30 = new Font( "arial", 1, 30);
+		Font fontArial15 = new Font( "arial", 1, 15);
 		
-		g.setFont(fontArial50);
-		g.setColor(Color.white);
-		g.drawString( "Menu", 245, 75);
+		if( game.gameState == STATE.Menu ) {
 		
-		g.setFont(fontArial30);
-		g.drawRect(210, 100, 200, 64);
-		g.drawString( "Play", 280, 145);
+			
+			g.setFont(fontArial50);
+			g.setColor(Color.white);
+			g.drawString( "Menu", 245, 75);
+			
+			g.setFont(fontArial30);
+			g.drawRect(210, 100, 200, 64);
+			g.drawString( "Play", 280, 145);
+			
+			g.setFont(fontArial30);
+			g.drawRect(210, 200, 200, 64);
+			g.drawString( "Quit", 280, 245);
+			
+			g.setFont(fontArial30);
+			g.drawRect(210, 300, 200, 64);
+			g.drawString( "Help", 280, 345);
 		
-		g.setFont(fontArial30);
-		g.drawRect(210, 200, 200, 64);
-		g.drawString( "Help", 280, 245);
-		
-		g.setFont(fontArial30);
-		g.drawRect(210, 300, 200, 64);
-		g.drawString( "Quit", 280, 345);
+		} else if (game.gameState == STATE.Help ) {
+
+			g.setFont(fontArial50);
+			g.setColor(Color.white);
+			g.drawString("Help", 240, 70);
+			
+			g.setFont(fontArial15);
+			g.drawString("Use the WASD keys to move and dodge enemies.", 150, 150);
+			
+			g.setFont(fontArial30);
+			g.drawRect(210, 200, 200, 64);
+			g.drawString("Back", 280, 245);
+			
+		}
 		
 	}
 	

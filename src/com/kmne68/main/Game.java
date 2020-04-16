@@ -39,8 +39,9 @@ public class Game extends Canvas implements Runnable {
 		
 		// TODO: Create an About menu option and corresponding screen
 		Menu,
-		Game,
-
+		Help,
+		Game
+		
 	};
 	
 	public STATE gameState = STATE.Menu;
@@ -49,16 +50,17 @@ public class Game extends Canvas implements Runnable {
 	public Game() {
 		
 		handler = new Handler();
+		menu = new Menu(this, handler);
 		this.addKeyListener(new KeyInput(handler));
+		this.addMouseListener(menu);
 		
 		new Window(WIDTH, HEIGHT, "Game Dev Example", this);
 		
 		hud = new HUD();
 		spawner = new Spawn(handler, hud);
-		menu = new Menu(this, handler);
 		random = new Random();		// testing
 		
-		if( gameState == STATE.Game) {
+/*		if( gameState == STATE.Game) {
 			
 			handler.addObject(new Player(WIDTH/2 - 32, HEIGHT/2 - 32, ID.Player, handler));
 			handler.addObject(new BasicEnemy(random.nextInt(Game.WIDTH),
@@ -67,7 +69,7 @@ public class Game extends Canvas implements Runnable {
 																			 handler));
 			
 		}
-		
+*/
 	}
 	
 
@@ -167,7 +169,7 @@ public class Game extends Canvas implements Runnable {
 			
 			hud.render(g);
 			
-		} else if( gameState == STATE.Menu) {
+		} else if( gameState == STATE.Menu || gameState == STATE.Help ) {
 			
 			menu.render(g);
 			
