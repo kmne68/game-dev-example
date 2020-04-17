@@ -21,12 +21,14 @@ public class Menu extends MouseAdapter {
 	private Game game;
 	private Handler handler;
 	private Random random = new Random();
+	private HUD hud;
 	
 	
-	public Menu( Game game, Handler handler ) {
+	public Menu( Game game, Handler handler, HUD hud ) {
 		
 		this.game = game;
 		this.handler = handler;
+		this.hud = hud;
 		
 	}
 	
@@ -45,6 +47,7 @@ public class Menu extends MouseAdapter {
 				game.gameState = STATE.Game;
 				
 				handler.addObject(new Player(Game.WIDTH/2 - 32, Game.HEIGHT/2 - 32, ID.Player, handler));
+				handler.clearEnemies();
 				handler.addObject(new BasicEnemy(random.nextInt(Game.WIDTH),
 																				 random.nextInt(Game.HEIGHT),
 																				 ID.BasicEnemy,
@@ -107,7 +110,7 @@ public class Menu extends MouseAdapter {
 			
 			g.setFont(fontArial50);
 			g.setColor(Color.white);
-			g.drawString( "Menu", 245, 75);
+			g.drawString( "Wave", 245, 75);
 			
 			g.setFont(fontArial30);
 			g.drawRect(210, 100, 200, 64);
@@ -133,6 +136,19 @@ public class Menu extends MouseAdapter {
 			g.setFont(fontArial30);
 			g.drawRect(210, 200, 200, 64);
 			g.drawString("Back", 280, 245);
+			
+		} else if (game.gameState == STATE.End ) {
+
+			g.setFont(fontArial50);
+			g.setColor(Color.white);
+			g.drawString("Game Over", 185, 100);
+			
+			g.setFont(fontArial15);
+			g.drawString("You lost with a score of: " + hud.getScore(), 210, 160);
+			
+			g.setFont(fontArial30);
+			g.drawRect(210, 210, 200, 74);
+			g.drawString("Try Again", 240, 255);
 			
 		}
 		
