@@ -32,6 +32,7 @@ public class Game extends Canvas implements Runnable {
 
 	private Random random;
 	private Handler handler;
+	private Handler particleHandler;
 	private HUD hud;
 	private Spawn spawner;
 	private Menu menu;
@@ -49,6 +50,7 @@ public class Game extends Canvas implements Runnable {
 	public Game() {
 
 		handler = new Handler();
+		particleHandler = new Handler();
 		hud = new HUD();
 		menu = new Menu(this, handler, hud);
 		this.addKeyListener(new KeyInput(handler));
@@ -70,8 +72,8 @@ public class Game extends Canvas implements Runnable {
 		  
 		  } else if (gameState == STATE.Menu) {
 		  	for (int i = 0; i < 20; i++) {
-
-		  		handler.addObject(new MenuParticle(random.nextInt(WIDTH), random.nextInt(HEIGHT), ID.MenuParticle, handler));
+		  		// changed handler to particleHandler
+		  		particleHandler.addObject(new MenuParticle(random.nextInt(WIDTH), random.nextInt(HEIGHT), ID.MenuParticle, particleHandler));
 
 		  	}
 		  }
@@ -136,6 +138,7 @@ public class Game extends Canvas implements Runnable {
 	private void tick() {
 
 		handler.tick();
+		particleHandler.tick();
 
 		if (gameState == STATE.Game) {
 
@@ -145,8 +148,10 @@ public class Game extends Canvas implements Runnable {
 			if ( HUD.HEALTH <= 0 ) {
 				
 				HUD.HEALTH = 100;
+				gameState = STATE.End;				
 				handler.clearEnemies();
-				gameState = STATE.End;
+	  		particleHandler.clearEnemies();		// added to remove particles when the game state is entered
+
 				
 			}
 
@@ -178,8 +183,9 @@ public class Game extends Canvas implements Runnable {
 			hud.render(g);
 
 		} else if (gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.End) {
-
+			
 			menu.render(g);
+			particleHandler.render(g);
 
 		}
 
