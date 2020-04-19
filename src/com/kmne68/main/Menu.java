@@ -81,6 +81,24 @@ public class Menu extends MouseAdapter {
 			
 		}
 		
+		
+		// Play Again button
+		if( game.gameState == STATE.End ) {
+			if(mouseOver( mouseX, mouseY, 210, 200, 200, 64 ) ) {
+				
+				game.gameState = STATE.Game;
+				hud.setLevel(1);
+				hud.setScore(0);
+				handler.addObject(new Player(Game.WIDTH/2 - 32, Game.HEIGHT/2 - 32, ID.Player, handler));
+				handler.clearEnemies();
+				handler.addObject(new BasicEnemy(random.nextInt(Game.WIDTH),
+																				 random.nextInt(Game.HEIGHT),
+																				 ID.BasicEnemy,
+																				 handler));
+			}
+			
+		}
+		
 	}
 	
 	

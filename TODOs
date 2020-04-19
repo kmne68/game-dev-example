@@ -1,2 +1,3 @@
 1. Make a configuration menu
 2. Let user choose background color
+3. Add method for adding particles so code isn't repeated in Game()

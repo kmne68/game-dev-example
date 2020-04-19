@@ -55,9 +55,8 @@ public class HUD {
 	
 	
 	public int getScore() {
-		
-		return this.score;
-		
+
+		return score;
 	}
 	
 	

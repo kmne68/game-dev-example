@@ -45,7 +45,7 @@ public class Game extends Canvas implements Runnable {
 	};
 
 
-	public STATE gameState = STATE.Menu;
+	public static STATE gameState = STATE.Menu;
 
 	public Game() {
 
@@ -151,6 +151,12 @@ public class Game extends Canvas implements Runnable {
 				gameState = STATE.End;				
 				handler.clearEnemies();
 	  		particleHandler.clearEnemies();		// added to remove particles when the game state is entered
+	  		
+		  	for (int i = 0; i < 20; i++) {
+		  		// changed handler to particleHandler
+		  		particleHandler.addObject(new MenuParticle(random.nextInt(WIDTH), random.nextInt(HEIGHT), ID.MenuParticle, particleHandler));
+
+		  	}
 
 				
 			}
