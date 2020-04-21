@@ -53,12 +53,15 @@ public class Menu extends MouseAdapter {
 																				 ID.BasicEnemy,
 																				 handler));
 				
+				AudioPlayer.getSound("menu_sound").play();
+				
 			}
 			
 			// Help button
 			if( mouseOver( mouseX, mouseY, 210, 300, 200, 64 ) ) {
 				
 				game.gameState = STATE.Help;
+				AudioPlayer.getSound("menu_sound").play();
 				
 			}			
 			
@@ -76,6 +79,7 @@ public class Menu extends MouseAdapter {
 			if(mouseOver( mouseX, mouseY, 210, 200, 200, 64 ) ) {
 				
 				game.gameState = STATE.Menu;
+				AudioPlayer.getSound("menu_sound").play();
 				return;
 			}
 			
@@ -95,6 +99,7 @@ public class Menu extends MouseAdapter {
 																				 random.nextInt(Game.HEIGHT),
 																				 ID.BasicEnemy,
 																				 handler));
+				AudioPlayer.getSound("menu_sound").play();
 			}
 			
 		}
