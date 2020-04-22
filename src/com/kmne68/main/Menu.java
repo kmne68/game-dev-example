@@ -43,7 +43,7 @@ public class Menu extends MouseAdapter {
 			
 			// Play button
 			if(mouseOver ( mouseX, mouseY, 210, 100, 200, 64 ) ) {
-				
+				/*
 				game.gameState = STATE.Game;
 				
 				handler.addObject(new Player(Game.WIDTH/2 - 32, Game.HEIGHT/2 - 32, ID.Player, handler));
@@ -52,6 +52,8 @@ public class Menu extends MouseAdapter {
 																				 random.nextInt(Game.HEIGHT),
 																				 ID.BasicEnemy,
 																				 handler));
+				*/
+				game.gameState = STATE.Select;
 				
 				AudioPlayer.getSound("menu_sound").play();
 				
@@ -72,7 +74,50 @@ public class Menu extends MouseAdapter {
 				
 			}
 			
-		}		
+		}
+
+		
+		/**
+		 * GameState = Select
+		 */
+		if( game.gameState == STATE.Select ) {
+			
+			// Normal button
+			if(mouseOver ( mouseX, mouseY, 210, 100, 200, 64 ) ) {
+				/*
+				game.gameState = STATE.Game;
+				
+				handler.addObject(new Player(Game.WIDTH/2 - 32, Game.HEIGHT/2 - 32, ID.Player, handler));
+				handler.clearEnemies();
+				handler.addObject(new BasicEnemy(random.nextInt(Game.WIDTH),
+																				 random.nextInt(Game.HEIGHT),
+																				 ID.BasicEnemy,
+																				 handler));
+				*/
+				game.gameState = STATE.Select;
+				
+				AudioPlayer.getSound("menu_sound").play();
+				
+			}
+			
+			// Hard button
+			if( mouseOver( mouseX, mouseY, 210, 300, 200, 64 ) ) {
+				
+				game.gameState = STATE.Help;
+				AudioPlayer.getSound("menu_sound").play();
+				
+			}			
+			
+			// Back button
+			if( mouseOver(mouseX, mouseY, 210, 200, 200, 64 ) ) {
+				
+				System.exit(1);
+				
+			}
+			
+		}	
+		
+		
 		
 		// Back button for Help
 		if( game.gameState == STATE.Help ) {
@@ -128,8 +173,7 @@ public class Menu extends MouseAdapter {
 		Font fontArial30 = new Font( "arial", 1, 30);
 		Font fontArial15 = new Font( "arial", 1, 15);
 		
-		if( game.gameState == STATE.Menu ) {
-		
+		if( game.gameState == STATE.Menu ) {		
 			
 			g.setFont(fontArial50);
 			g.setColor(Color.white);
@@ -173,6 +217,24 @@ public class Menu extends MouseAdapter {
 			g.drawRect(210, 210, 200, 74);
 			g.drawString("Try Again", 240, 255);
 			
+		} else if( game.gameState == STATE.Select ) {		
+			
+			g.setFont(fontArial50);
+			g.setColor(Color.white);
+			g.drawString( "Select Difficulty", 135, 75);
+			
+			g.setFont(fontArial30);
+			g.drawRect(210, 100, 200, 64);
+			g.drawString( "Normal", 255, 145);
+			
+			g.setFont(fontArial30);
+			g.drawRect(210, 200, 200, 64);
+			g.drawString( "Hard", 280, 245);
+			
+			g.setFont(fontArial30);
+			g.drawRect(210, 300, 200, 64);
+			g.drawString( "Back", 280, 345);
+		
 		}
 		
 	}

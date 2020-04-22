@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.Random;
 
-
 /**
  * 
  * @author kmne6
@@ -27,9 +26,12 @@ public class Game extends Canvas implements Runnable {
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = WIDTH / 12 * 9;
 
-	private Thread thread;
+	public static boolean paused = false;
+	public int difficulty = 0;		// 0 = normal, 1 = hard
+
 	private boolean running = false;
 
+	private Thread thread;
 	private Random random;
 	private Handler handler;
 	private Handler particleHandler;
@@ -40,10 +42,9 @@ public class Game extends Canvas implements Runnable {
 	public enum STATE {
 
 		// TODO: Create an About menu option and corresponding screen
-		Menu, Help, Game, End
+		Menu, Help, Game, End, Select
 
 	};
-
 
 	public static STATE gameState = STATE.Menu;
 
@@ -53,34 +54,35 @@ public class Game extends Canvas implements Runnable {
 		particleHandler = new Handler();
 		hud = new HUD();
 		menu = new Menu(this, handler, hud);
-		this.addKeyListener(new KeyInput(handler));
+		this.addKeyListener( new KeyInput ( handler, this ) );
 		this.addMouseListener(menu);
-		
+
 		AudioPlayer.loadSound();
 		AudioPlayer.getMusic("music").loop();
 
-		new Window(WIDTH, HEIGHT, "Game Dev Example", this);
+		new Window( WIDTH, HEIGHT, "Game Dev Example", this );
 
 		spawner = new Spawn(handler, hud);
 		random = new Random(); // testing
 
+		if (gameState == STATE.Game) {
 
-		  if( gameState == STATE.Game) {
-		  
-		//  handler.addObject(new Player(WIDTH/2 - 32, HEIGHT/2 - 32, ID.Player, handler)); 
-		//  handler.addObject(new BasicEnemy(random.nextInt(Game.WIDTH),
-		//  																 random.nextInt(Game.HEIGHT),
-		//  																 ID.BasicEnemy, 
-		//  																 handler));
-		  
-		  } else if (gameState == STATE.Menu) {
-		  	for (int i = 0; i < 20; i++) {
-		  		// changed handler to particleHandler
-		  		particleHandler.addObject(new MenuParticle(random.nextInt(WIDTH), random.nextInt(HEIGHT), ID.MenuParticle, particleHandler));
+			// handler.addObject(new Player(WIDTH/2 - 32, HEIGHT/2 - 32, ID.Player,
+			// handler));
+			// handler.addObject(new BasicEnemy(random.nextInt(Game.WIDTH),
+			// random.nextInt(Game.HEIGHT),
+			// ID.BasicEnemy,
+			// handler));
 
-		  	}
-		  }
+		} else if (gameState == STATE.Menu) {
+			for (int i = 0; i < 20; i++) {
+				// changed handler to particleHandler
+				particleHandler.addObject(
+						new MenuParticle(random.nextInt(WIDTH), random.nextInt(HEIGHT), ID.MenuParticle, particleHandler));
+
+			}
 		}
+	}
 
 	// start our thread, this refers to the current instance of Game
 	public synchronized void start() {
@@ -140,33 +142,37 @@ public class Game extends Canvas implements Runnable {
 
 	private void tick() {
 
-		handler.tick();
 		particleHandler.tick();
 
 		if (gameState == STATE.Game) {
 
-			hud.tick();
-			spawner.tick();
-			
-			if ( HUD.HEALTH <= 0 ) {
-				
-				HUD.HEALTH = 100;
-				gameState = STATE.End;				
-				handler.clearEnemies();
-	  		particleHandler.clearEnemies();		// added to remove particles when the game state is entered
-	  		
-		  	for (int i = 0; i < 20; i++) {
-		  		// changed handler to particleHandler
-		  		particleHandler.addObject(new MenuParticle(random.nextInt(WIDTH), random.nextInt(HEIGHT), ID.MenuParticle, particleHandler));
+			if (!paused) {
 
-		  	}
+				hud.tick();
+				spawner.tick();
+				handler.tick();
 
-				
+				if (HUD.HEALTH <= 0) {
+
+					HUD.HEALTH = 100;
+					gameState = STATE.End;
+					handler.clearEnemies();
+					particleHandler.clearEnemies(); // added to remove particles when the game state is entered
+
+					for (int i = 0; i < 20; i++) {
+						// changed handler to particleHandler
+						particleHandler.addObject(
+								new MenuParticle(random.nextInt(WIDTH), random.nextInt(HEIGHT), ID.MenuParticle, particleHandler));
+					}
+
+				}
+
 			}
 
-		} else if (gameState == STATE.Menu || gameState == STATE.End ) {
+		} else if (gameState == STATE.Menu || gameState == STATE.End || gameState == STATE.Select) {
 
 			menu.tick();
+			handler.tick();
 
 		}
 
@@ -186,13 +192,20 @@ public class Game extends Canvas implements Runnable {
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 
 		handler.render(g);
+		
+		if(paused) {
+			
+			g.setColor( Color.orange );
+			g.drawString( "PAUSED", 100, 100 );
+			
+		}
 
 		if (gameState == STATE.Game) {
 
 			hud.render(g);
 
-		} else if (gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.End) {
-			
+		} else if (gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.End || gameState == STATE.Select ) {
+
 			menu.render(g);
 			particleHandler.render(g);
 
