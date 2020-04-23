@@ -27,7 +27,7 @@ public class Game extends Canvas implements Runnable {
 	public static final int HEIGHT = WIDTH / 12 * 9;
 
 	public static boolean paused = false;
-	public int difficulty = 0;		// 0 = normal, 1 = hard
+	public int difficulty = 0;					// 0 = normal, 1 = hard
 
 	private boolean running = false;
 
@@ -62,7 +62,7 @@ public class Game extends Canvas implements Runnable {
 
 		new Window( WIDTH, HEIGHT, "Game Dev Example", this );
 
-		spawner = new Spawn(handler, hud);
+		spawner = new Spawn(handler, hud, this);
 		random = new Random(); // testing
 
 		if (gameState == STATE.Game) {
