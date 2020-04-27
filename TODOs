@@ -1,3 +1,4 @@
-1. Make a configuration menu
+1. Make a configuration menu (include turning sound off, turning off enemy trails)
 2. Let user choose background color
 3. Add method for adding particles so code isn't repeated in Game()
+4. Refactor the calls to the image loaders, they are repeated in every enemy and the player

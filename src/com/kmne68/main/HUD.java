@@ -43,6 +43,7 @@ public class HUD {
 		// TODO: generalize this so that it automatically is placed relative to the upper left corner
 		g.drawString("Score " + score, 15, 64);
 		g.drawString("Level " + level, 15, 80);
+		g.drawString("Shop ", 15, 94);
 		
 	}
 	

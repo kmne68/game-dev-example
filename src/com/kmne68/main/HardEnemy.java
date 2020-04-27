@@ -3,13 +3,18 @@ package com.kmne68.main;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
+
 public class HardEnemy extends GameObject {
+
 	
+	private BufferedImage enemyImage;
 	private Handler handler;
 	private Random random = new Random();
 
+	
 	public HardEnemy(int x, int y, ID id, Handler handler) {
 		super(x, y, id);
 		
@@ -17,6 +22,10 @@ public class HardEnemy extends GameObject {
 		
 		velocityX = 5;
 		velocityY = 5;
+		
+		SpriteSheet spriteSheet = new SpriteSheet(Game.spriteSheet);
+		
+		enemyImage = spriteSheet.grabImage( 4, 1, 32, 32 );
 
 	}
 	
@@ -55,8 +64,10 @@ public class HardEnemy extends GameObject {
 
 	public void render(Graphics g) {
 
-		g.setColor( Color.yellow );
-		g.fillRect( ( int) x, (int) y, 16, 16);
+		// g.setColor( Color.yellow );
+		// g.fillRect( ( int) x, (int) y, 16, 16);
+		
+		g.drawImage( enemyImage, (int) x, (int) y, null );
 		
 	}
 

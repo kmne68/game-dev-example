@@ -4,6 +4,8 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Random;
 
 /**
@@ -25,6 +27,7 @@ public class Game extends Canvas implements Runnable {
 
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = WIDTH / 12 * 9;
+	public static BufferedImage spriteSheet;
 
 	public static boolean paused = false;
 	public int difficulty = 0;					// 0 = normal, 1 = hard
@@ -38,24 +41,38 @@ public class Game extends Canvas implements Runnable {
 	private HUD hud;
 	private Spawn spawner;
 	private Menu menu;
+	private Shop shop;
 
 	public enum STATE {
 
 		// TODO: Create an About menu option and corresponding screen
-		Menu, Help, Game, End, Select
+		Menu, Help, Shop, Game, End, Select
 
 	};
 
 	public static STATE gameState = STATE.Menu;
 
+	
 	public Game() {
+		
+		BufferedImageLoader loader = new BufferedImageLoader();
+		
+		try {
+			spriteSheet = loader.loadImage("/sprite_sheet.png");
+			System.out.println("loaded");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		handler = new Handler();
+		handler 				= new Handler();
 		particleHandler = new Handler();
-		hud = new HUD();
-		menu = new Menu(this, handler, hud);
+		hud 						= new HUD();
+		shop 						= new Shop(handler, hud);
+		menu 						= new Menu(this, handler, hud);
+		
 		this.addKeyListener( new KeyInput ( handler, this ) );
 		this.addMouseListener(menu);
+		this.addMouseListener(shop);
 
 		AudioPlayer.loadSound();
 		AudioPlayer.getMusic("music").loop();
@@ -67,6 +84,7 @@ public class Game extends Canvas implements Runnable {
 
 		if (gameState == STATE.Game) {
 
+			// NOTE: in the tutorial, the code commented out below remains in the Game constructor, but is not necessary
 			// handler.addObject(new Player(WIDTH/2 - 32, HEIGHT/2 - 32, ID.Player,
 			// handler));
 			// handler.addObject(new BasicEnemy(random.nextInt(Game.WIDTH),
@@ -191,7 +209,7 @@ public class Game extends Canvas implements Runnable {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 
-		handler.render(g);
+//		handler.render(g);
 		
 		if(paused) {
 			
@@ -203,11 +221,19 @@ public class Game extends Canvas implements Runnable {
 		if (gameState == STATE.Game) {
 
 			hud.render(g);
+			handler.render(g);
 
-		} else if (gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.End || gameState == STATE.Select ) {
+		} 
+		else if ( gameState == STATE.Shop ) {
+			
+			shop.render(g);
+			
+		}		
+		else if (gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.End || gameState == STATE.Select ) {
 
 			menu.render(g);
 			particleHandler.render(g);
+			handler.render(g);
 
 		}
 

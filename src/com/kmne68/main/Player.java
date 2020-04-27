@@ -2,19 +2,28 @@ package com.kmne68.main;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.Random;
+
 
 public class Player extends GameObject {
 	
-	Random random = new Random();		// testing
-	Handler handler;
+	
+	private BufferedImage playerImage;
+	private Random random = new Random();		// testing
+	private Handler handler;
 
+	
 	public Player(int x, int y, ID id, Handler handler) {
 		super(x, y, id);
 
 		this.handler = handler;
+		
+		SpriteSheet spriteSheet = new SpriteSheet(Game.spriteSheet);
+		
+		playerImage = spriteSheet.grabImage(1, 1, 32, 32);
+		
 	}
 	
 	
@@ -33,7 +42,8 @@ public class Player extends GameObject {
 		y = Game.clamp(y, 0, Game.HEIGHT - 60);
 		
 
-		handler.addObject(new Trail( x, y, ID.Trail, Color.WHITE, 32, 32, 0.08f, handler));
+		// TODO: in customization, make the enemy trails optional
+		// handler.addObject(new Trail( x, y, ID.Trail, Color.WHITE, 32, 32, 0.08f, handler));
 		
 		collision();
 		
@@ -61,8 +71,10 @@ public class Player extends GameObject {
 	
 	public void render(Graphics g) {
 
-		g.setColor(Color.WHITE);
-		g.fillRect( (int) x, (int) y, 32, 32);		
+		// g.setColor(Color.WHITE);
+		// g.fillRect( (int) x, (int) y, 32, 32);		
+		
+		g.drawImage(playerImage, (int) x, (int) y, null);
 		
 	}
 
