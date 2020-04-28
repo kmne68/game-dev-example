@@ -13,9 +13,9 @@ public class Shop extends MouseAdapter {
 	private Handler handler;
 	private HUD hud;
 	
-	private int B1 = 1000;
-	private int B2 = 1000;
-	private int B3 = 1000;
+	private int B1 = 100;
+	private int B2 = 100;
+	private int B3 = 100;
 	
 	
 	public Shop(Handler handler, HUD hud) {
@@ -58,25 +58,37 @@ public class Shop extends MouseAdapter {
 		int mouseX = e.getX();
 		int mouseY = e.getY();
 		
-		// box 1 select
+		// box 1 select, upgrade health
 		if ( mouseX >= 100 && mouseX <= 210 ) {
 			if( mouseY >= 100 && mouseY <= 180 ) {
-				System.out.println("Box 1");
+				if( hud.getScore() >= B1 ) {					
+					hud.setScore( hud.getScore() - B1);
+					B1 += 100;
+					hud.setBounds(20);
+					hud.HEALTH = ( 100 + ( hud.getBounds() / 2 ) );
+				}
 			}
 		}
 		
-		// box 2 select
+		// box 2 select, upgrade speed
 		if ( mouseX >= 250 && mouseX <= 360 ) {
 			if( mouseY >= 100 && mouseY <= 180 ) {
-				System.out.println("Box 2");
+				if( hud.getScore() >= B2 ) {					
+					hud.setScore( hud.getScore() - B2);
+					B2 += 100;
+					handler.setSpeed( 1 );
+				}
 				
 			}
 		}
 		
-		// box 3 select
+		// box 3 select, reset health
 		if ( mouseX >= 400 && mouseX <= 510 ) {
 			if( mouseY >= 100 && mouseY <= 180 ) {
-				System.out.println("Box 3");
+				if( hud.getScore() >= B3 ) {					
+					hud.setScore( hud.getScore() - B3);
+					hud.HEALTH = ( 100 + ( hud.getBounds() / 2 ) );
+				}
 				
 			}
 		}

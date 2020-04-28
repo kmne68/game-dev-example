@@ -38,19 +38,19 @@ public class KeyInput extends KeyAdapter {
 
 				// key events for object
 				if (key == KeyEvent.VK_W) {
-					tempObject.setVelocityY(-5);
+					tempObject.setVelocityY( -handler.getSpeed() );
 					keyDown[0] = true;
 				}
 				if (key == KeyEvent.VK_S) {
-					tempObject.setVelocityY(5);
+					tempObject.setVelocityY( handler.getSpeed() );
 					keyDown[1] = true;
 				}
 				if (key == KeyEvent.VK_A) {
-					tempObject.setVelocityX(-5);
+					tempObject.setVelocityX( -handler.getSpeed() );
 					keyDown[2] = true;
 				}
 				if (key == KeyEvent.VK_D) {
-					tempObject.setVelocityX(5);
+					tempObject.setVelocityX( handler.getSpeed() );
 					keyDown[3] = true;
 				}
 			}

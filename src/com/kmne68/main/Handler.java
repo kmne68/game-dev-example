@@ -12,6 +12,7 @@ import java.util.LinkedList;
  */
 public class Handler {
 	
+	private int speed = 5;
 	
 	LinkedList<GameObject> gameObjects = new LinkedList<GameObject>();
 	
@@ -69,6 +70,20 @@ public class Handler {
 	public void removeObject(GameObject object) {
 		
 		this.gameObjects.remove(object);
+		
+	}
+	
+	
+	public int getSpeed() {
+		
+		return speed;
+		
+	}
+	
+	
+	public void setSpeed(int speedDelta) {
+		
+		this.speed += speedDelta;
 		
 	}
 
