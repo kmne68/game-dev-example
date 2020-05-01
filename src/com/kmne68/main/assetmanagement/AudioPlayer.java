@@ -1,4 +1,4 @@
-package com.kmne68.main;
+package com.kmne68.main.assetmanagement;
 
 import java.util.HashMap;
 import java.util.Map;

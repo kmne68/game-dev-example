@@ -7,6 +7,7 @@ import com.kmne68.main.enemies.EnemyBoss;
 import com.kmne68.main.enemies.FastEnemy;
 import com.kmne68.main.enemies.HardEnemy;
 import com.kmne68.main.enemies.SmartEnemy;
+import com.kmne68.main.ui.HUD;
 
 /**
  * 

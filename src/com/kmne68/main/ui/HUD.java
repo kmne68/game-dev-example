@@ -1,7 +1,9 @@
-package com.kmne68.main;
+package com.kmne68.main.ui;
 
 import java.awt.Color;
 import java.awt.Graphics;
+
+import com.kmne68.main.Game;
 
 /**
  * @author kmne6

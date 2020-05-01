@@ -1,9 +1,11 @@
-package com.kmne68.main;
+package com.kmne68.main.ui;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+
+import com.kmne68.main.Game;
 
 public class Window extends Canvas {
 

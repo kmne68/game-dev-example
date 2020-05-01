@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import com.kmne68.main.ui.HUD;
+
 
 public class Shop extends MouseAdapter {
 	

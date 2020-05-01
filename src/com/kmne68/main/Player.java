@@ -6,6 +6,9 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import com.kmne68.main.assetmanagement.SpriteSheet;
+import com.kmne68.main.ui.HUD;
+
 
 public class Player extends GameObject {
 	

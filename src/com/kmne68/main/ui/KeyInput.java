@@ -1,8 +1,12 @@
-package com.kmne68.main;
+package com.kmne68.main.ui;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import com.kmne68.main.Game;
+import com.kmne68.main.GameObject;
+import com.kmne68.main.Handler;
+import com.kmne68.main.ID;
 import com.kmne68.main.Game.STATE;
 
 

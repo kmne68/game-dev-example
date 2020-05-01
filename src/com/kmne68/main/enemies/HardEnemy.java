@@ -10,8 +10,8 @@ import com.kmne68.main.Game;
 import com.kmne68.main.GameObject;
 import com.kmne68.main.Handler;
 import com.kmne68.main.ID;
-import com.kmne68.main.SpriteSheet;
 import com.kmne68.main.Trail;
+import com.kmne68.main.assetmanagement.SpriteSheet;
 
 
 public class HardEnemy extends GameObject {
