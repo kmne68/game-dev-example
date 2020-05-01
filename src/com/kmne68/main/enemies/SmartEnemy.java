@@ -1,8 +1,14 @@
-package com.kmne68.main;
+package com.kmne68.main.enemies;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+
+import com.kmne68.main.Game;
+import com.kmne68.main.GameObject;
+import com.kmne68.main.Handler;
+import com.kmne68.main.ID;
+import com.kmne68.main.Trail;
 
 
 /**
@@ -23,9 +29,9 @@ public class SmartEnemy extends GameObject {
 		
 		this.handler = handler;
 		
-		for(int i = 0; i < handler.gameObjects.size(); i++) {
-			if(handler.gameObjects.get(i).getId() == id.Player)
-				player = handler.gameObjects.get(i);
+		for(int i = 0; i < handler.getGameObjects().size(); i++) {
+			if(handler.getGameObjects().get(i).getId() == id.Player)
+				player = handler.getGameObjects().get(i);
 				
 		}
 

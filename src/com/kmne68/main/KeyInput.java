@@ -31,8 +31,8 @@ public class KeyInput extends KeyAdapter {
 
 		int key = e.getKeyCode();
 
-		for (int i = 0; i < handler.gameObjects.size(); i++) {
-			GameObject tempObject = handler.gameObjects.get(i);
+		for (int i = 0; i < handler.getGameObjects().size(); i++) {
+			GameObject tempObject = handler.getGameObjects().get(i);
 
 			if (tempObject.getId() == ID.Player) {
 
@@ -84,8 +84,8 @@ public class KeyInput extends KeyAdapter {
 
 		int key = e.getKeyCode();
 
-		for (int i = 0; i < handler.gameObjects.size(); i++) {
-			GameObject tempObject = handler.gameObjects.get(i);
+		for (int i = 0; i < handler.getGameObjects().size(); i++) {
+			GameObject tempObject = handler.getGameObjects().get(i);
 
 			if (tempObject.getId() == ID.Player) {
 

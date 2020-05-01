@@ -1,9 +1,15 @@
-package com.kmne68.main;
+package com.kmne68.main.enemies;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Random;
+
+import com.kmne68.main.Game;
+import com.kmne68.main.GameObject;
+import com.kmne68.main.Handler;
+import com.kmne68.main.ID;
+import com.kmne68.main.Trail;
 
 
 /**

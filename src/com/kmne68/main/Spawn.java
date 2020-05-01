@@ -2,6 +2,12 @@ package com.kmne68.main;
 
 import java.util.Random;
 
+import com.kmne68.main.enemies.BasicEnemy;
+import com.kmne68.main.enemies.EnemyBoss;
+import com.kmne68.main.enemies.FastEnemy;
+import com.kmne68.main.enemies.HardEnemy;
+import com.kmne68.main.enemies.SmartEnemy;
+
 /**
  * 
  * @author kmne6

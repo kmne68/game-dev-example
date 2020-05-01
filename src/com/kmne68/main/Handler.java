@@ -14,14 +14,14 @@ public class Handler {
 	
 	private int speed = 5;
 	
-	LinkedList<GameObject> gameObjects = new LinkedList<GameObject>();
+	private LinkedList<GameObject> gameObjects = new LinkedList<GameObject>();
 	
 	
 	public void tick() {
 		
-		for(int i = 0; i < gameObjects.size(); i++) {
+		for(int i = 0; i < getGameObjects().size(); i++) {
 			
-			GameObject tempObject = gameObjects.get(i);
+			GameObject tempObject = getGameObjects().get(i);
 			
 			tempObject.tick();
 		}
@@ -31,9 +31,9 @@ public class Handler {
 	
 	public void render(Graphics g) {
 		
-		for(int i = 0; i < gameObjects.size(); i++) {
+		for(int i = 0; i < getGameObjects().size(); i++) {
 			
-			GameObject tempObject = gameObjects.get(i);
+			GameObject tempObject = getGameObjects().get(i);
 			
 			tempObject.render(g);
 			
@@ -44,13 +44,13 @@ public class Handler {
 	
 	public void clearEnemies() {
 		
-		for(int i = 0; i < gameObjects.size(); i++) {
+		for(int i = 0; i < getGameObjects().size(); i++) {
 			
-			GameObject tempObject = gameObjects.get(i);
+			GameObject tempObject = getGameObjects().get(i);
 			
 			if ( tempObject.getId() == ID.Player )
 			{
-				gameObjects.clear();
+				getGameObjects().clear();
 				if(Game.gameState != Game.STATE.End )
 					addObject(new Player( (int) tempObject.getX(), (int) tempObject.getY(), ID.Player, this ) );
 			}
@@ -62,14 +62,14 @@ public class Handler {
 	
 	public void addObject(GameObject object) {
 		
-		this.gameObjects.add(object);
+		this.getGameObjects().add(object);
 		
 	}
 	
 	
 	public void removeObject(GameObject object) {
 		
-		this.gameObjects.remove(object);
+		this.getGameObjects().remove(object);
 		
 	}
 	
@@ -85,6 +85,16 @@ public class Handler {
 		
 		this.speed += speedDelta;
 		
+	}
+
+
+	public LinkedList<GameObject> getGameObjects() {
+		return gameObjects;
+	}
+
+
+	public void setGameObjects(LinkedList<GameObject> gameObjects) {
+		this.gameObjects = gameObjects;
 	}
 
 }

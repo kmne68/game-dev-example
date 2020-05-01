@@ -8,6 +8,8 @@ import java.awt.event.MouseEvent;
 import java.util.Random;
 
 import com.kmne68.main.Game.STATE;
+import com.kmne68.main.enemies.BasicEnemy;
+import com.kmne68.main.enemies.HardEnemy;
 
 /**
  * 

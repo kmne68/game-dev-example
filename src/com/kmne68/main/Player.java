@@ -52,9 +52,9 @@ public class Player extends GameObject {
 	
 	private void collision() {
 		
-		for(int i = 0; i < handler.gameObjects.size(); i++) {
+		for(int i = 0; i < handler.getGameObjects().size(); i++) {
 			
-			GameObject tempObject = handler.gameObjects.get(i);
+			GameObject tempObject = handler.getGameObjects().get(i);
 			
 			if(tempObject.getId() == ID.BasicEnemy || tempObject.getId() == ID.FastEnemy || tempObject.getId() == ID.SmartEnemy) {
 				
